@@ -1,0 +1,7 @@
+node_modules
+.awcache
+dist
+exp
+roms
+xnes
+emsdk

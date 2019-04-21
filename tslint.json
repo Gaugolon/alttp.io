@@ -1,0 +1,18 @@
+{
+    "extends": ["tslint-consistent-codestyle", "tslint-clean-code"],
+    "rules": {
+        "max-line-length": {
+            "options": [80]
+        },
+        "ordered-imports": true,
+        "new-parens": true,
+        "no-arg": true,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "semicolon": [true, "always"],
+        "no-console": {
+            "severity": "warning",
+            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+        }
+    }
+}
