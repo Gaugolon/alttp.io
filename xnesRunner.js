@@ -8,7 +8,7 @@ class XNesRunner extends events_1.EventEmitter {
     constructor(rom) {
         super();
         this.currentFrame = 0;
-        const workerPath = path.resolve('ww.js');
+        const workerPath = path.resolve('snes9x.js');
         const fileContent = fs.readFileSync(rom);
         this.worker = new Worker(workerPath);
         this.worker.onerror = (e) => console.error(e);
@@ -16,20 +16,29 @@ class XNesRunner extends events_1.EventEmitter {
             switch (e.data.cmd) {
                 case "print":
                     console.log("XNesRunner:", e.data.txt);
+                    if (e.data.txt == "file loaded")
+                        this.worker.postMessage({ cmd: 'start' });
                     break;
                 case "render":
                     this.currentFrame++;
                     this.onFrame(this.currentFrame, e.data.src);
+                    break;
+                case "render2":
+                    this.currentFrame++;
+                    this.onFrame(this.currentFrame, new Int32Array(e.data.src));
+                    break;
             }
         };
         this.worker.postMessage({ cmd: 'loadfile', buffer: fileContent });
-        this.worker.postMessage({ cmd: 'start' });
     }
     onFrame(frame, data) {
         this.emit('frame', { frame, data });
     }
     sendControl(state) {
         this.worker.postMessage({ cmd: "joy1", state });
+    }
+    stop() {
+        this.worker.terminate();
     }
 }
 exports.default = XNesRunner;

@@ -19,6 +19,16 @@ var Button;
     Button[Button["L"] = 0] = "L";
     Button[Button["R"] = 0] = "R";
 })(Button || (Button = {}));
+var Mode;
+(function (Mode) {
+    Mode[Mode["VANILLA"] = 0] = "VANILLA";
+    Mode[Mode["RANDOMIZED"] = 1] = "RANDOMIZED";
+})(Mode || (Mode = {}));
+var CCode;
+(function (CCode) {
+    CCode["DE"] = "09";
+    CCode["JP"] = "00";
+})(CCode || (CCode = {}));
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -33,24 +43,35 @@ const render = (data) => {
     }
     context.putImageData(imgData, 0, 0);
 };
-const filePath = path.resolve('./roms/alttp.sfc');
+const filePath = path.resolve('./roms/alttp.smc');
 const xnes = new xnesRunner_1.default(filePath);
+let currentFrame = 0;
 xnes.on('frame', (e) => {
     render(e.data);
+    currentFrame = e.frame;
     frameOut.innerText = e.frame.toString();
 });
 const tapButton = (button) => {
     console.log(`TAP ${button}`);
     return holdButton(button, 1);
 };
-const spamButton = (button, duration) => {
-    console.log(`SPAMMING ${button} FOR ${duration} MILLISECONDS`);
+const spamButton = (button, frames) => {
     return new Promise((resolve, reject) => {
-        const interval = setInterval(() => tapButton(button), 300);
-        setTimeout(() => {
-            clearInterval(interval);
-            resolve();
-        }, duration);
+        let f = 0;
+        const listener = () => {
+            if (f >= frames) {
+                xnes.removeListener("frame", listener);
+                resolve();
+            }
+            if (f % 4 == 0) {
+                tapButton(button);
+            }
+            else {
+                xnes.sendControl(0);
+            }
+            f++;
+        };
+        xnes.addListener("frame", listener);
     });
 };
 const holdButton = (button, frames) => {
@@ -61,7 +82,6 @@ const holdButton = (button, frames) => {
         xnes.sendControl(state);
         const listener = () => {
             if (f >= frames) {
-                console.log(`RELEASING BUTTON ${button} AFTER ${f} FRAMES`);
                 xnes.sendControl(0);
                 xnes.removeListener("frame", listener);
                 resolve();
@@ -72,78 +92,155 @@ const holdButton = (button, frames) => {
     });
 };
 const wait = (frame) => {
-    console.log(`WAITING FOR ${frame} FRAMES`);
     return new Promise((resolve, reject) => {
         let frames = 0;
-        xnes.on("frame", () => {
-            if (frames >= frame)
+        const listener = () => {
+            if (frames >= frame) {
+                xnes.removeListener("frame", listener);
                 resolve();
+            }
             frames++;
-        });
+        };
+        xnes.addListener("frame", listener);
     });
 };
 const waitUntil = (frame) => {
-    console.log(`WAITING UNTIL FRAME ${frame}`);
     return new Promise((resolve, reject) => {
-        xnes.on("frame", (e) => {
-            if (e.frame >= frame)
+        const listener = (e) => {
+            if (e.frame >= frame) {
+                xnes.removeListener("frame", listener);
                 resolve();
-        });
+            }
+        };
+        xnes.addListener("frame", listener);
     });
 };
+const mode = Mode.VANILLA;
+const countryCode = CCode.JP;
+const getStartFrame = () => {
+    switch (countryCode) {
+        case CCode.DE:
+            return 300;
+        case CCode.JP:
+            return 400;
+    }
+};
+const getWriteCursorsSettleFrames = () => {
+    switch (countryCode) {
+        case CCode.DE:
+            return 2;
+        case CCode.JP:
+            return 3;
+    }
+};
 const frameMarker = {
-    startFrame: 300,
-    menuTransitionFrames: 3,
-    writeCursorsSettleFrames: 2,
+    startFrame: getStartFrame(),
+    menuTransitionFrames: 4,
+    writeCursorsSettleFrames: getWriteCursorsSettleFrames(),
     selectGameFrames: 100,
 };
 const startControls = () => {
     Promise.resolve()
         .then(() => startGame())
-        .then(() => skipStartSequence())
+        .then(() => console.log("startGame sequence finished at frame: ", currentFrame))
+        .then(() => skipIntro())
+        .then(() => console.log("skipIntro sequence finished at frame: ", currentFrame))
         .then(() => leaveHouse())
-        .then(() => console.log('DONE'))
+        .then(() => console.log("leaveHouse sequence finished at frame: ", currentFrame))
+        .then(() => {
+        xnes.stop();
+        console.log('DONE');
+    })
         .catch(console.error);
 };
 const startGame = () => {
-    return Promise.resolve()
-        .then(() => waitUntil(frameMarker.startFrame))
-        .then(() => tapButton(Button.START))
-        .then(() => wait(frameMarker.selectGameFrames))
-        .then(() => tapButton(Button.START))
-        .then(() => wait(frameMarker.menuTransitionFrames))
-        .then(() => holdButton(Button.LEFT, 18))
-        .then(() => holdButton(Button.DOWN, 6))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => holdButton(Button.LEFT, 18))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => holdButton(Button.RIGHT, 26))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => holdButton(Button.LEFT, 17))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => holdButton(Button.LEFT, 15))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => holdButton(Button.RIGHT, 30))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.X))
-        .then(() => tapButton(Button.START))
-        .then(() => wait(frameMarker.writeCursorsSettleFrames))
-        .then(() => tapButton(Button.START))
-        .then(() => wait(frameMarker.menuTransitionFrames))
-        .catch((error) => console.log(error));
+    switch (countryCode) {
+        case CCode.DE:
+            return Promise.resolve()
+                .then(() => waitUntil(frameMarker.startFrame))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.selectGameFrames))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.menuTransitionFrames))
+                .then(() => holdButton(Button.LEFT, 18))
+                .then(() => holdButton(Button.DOWN, 6))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 18))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.RIGHT, 18))
+                .then(() => holdButton(Button.DOWN, 18))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 17))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 15))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.RIGHT, 30))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.menuTransitionFrames))
+                .then(() => tapButton(Button.START))
+                .catch(console.error);
+        case CCode.JP:
+            return Promise.resolve()
+                .then(() => waitUntil(frameMarker.startFrame))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.selectGameFrames))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.menuTransitionFrames))
+                .then(() => holdButton(Button.LEFT, 20))
+                .then(() => holdButton(Button.DOWN, 10))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 18))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.RIGHT, 26))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 17))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.LEFT, 15))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => holdButton(Button.RIGHT, 30))
+                .then(() => wait(frameMarker.writeCursorsSettleFrames))
+                .then(() => tapButton(Button.X))
+                .then(() => tapButton(Button.START))
+                .then(() => wait(frameMarker.menuTransitionFrames))
+                .then(() => tapButton(Button.START))
+                .catch(console.error);
+    }
 };
-const skipStartSequence = () => {
-    return spamButton(Button.X, 40000);
+const skipIntro = () => {
+    switch (mode) {
+        case Mode.RANDOMIZED:
+            return Promise.resolve()
+                .then(() => wait(100))
+                .then(() => tapButton(Button.X))
+                .then(() => wait(50));
+        case Mode.VANILLA:
+            return Promise.resolve()
+                .then(() => spamButton(Button.X, 1880))
+                .catch(console.log);
+            break;
+    }
 };
 const leaveHouse = () => {
     return Promise.resolve()
-        .then(() => waitUntil(2600))
-        .then(() => holdButton(Button.RIGHT, 300))
+        .then(() => wait(100))
+        .then(() => holdButton(Button.RIGHT, 18))
+        .then(() => holdButton(Button.DOWN, 62))
+        .then(() => holdButton(Button.RIGHT, 50))
+        .then(() => tapButton(Button.UP))
+        .then(() => tapButton(Button.X))
+        .then(() => wait(2500))
         .catch(console.error);
 };
 startControls();
