@@ -30,24 +30,12 @@ var CCode;
     CCode["JP"] = "00";
 })(CCode || (CCode = {}));
 const canvas = document.getElementById('screen');
-const context = canvas.getContext('2d');
-const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+console.log({ canvas });
 const frameOut = document.getElementById('currentFrame');
-const render = (data) => {
-    for (let i = 0; i < data.length; i++) {
-        const val = data[i];
-        imgData.data[i * 4 + 0] = Math.abs((val & 0x0000FF) >> 0);
-        imgData.data[i * 4 + 1] = Math.abs((val & 0x00FF00) >> 8);
-        imgData.data[i * 4 + 2] = Math.abs((val & 0xFF0000) >> 16);
-        imgData.data[i * 4 + 3] = 255;
-    }
-    context.putImageData(imgData, 0, 0);
-};
 const filePath = path.resolve('./roms/alttp.smc');
-const xnes = new xnesRunner_1.default(filePath);
+const xnes = new xnesRunner_1.default(filePath, canvas);
 let currentFrame = 0;
 xnes.on('frame', (e) => {
-    render(e.data);
     currentFrame = e.frame;
     frameOut.innerText = e.frame.toString();
 });
@@ -240,8 +228,14 @@ const leaveHouse = () => {
         .then(() => holdButton(Button.RIGHT, 50))
         .then(() => tapButton(Button.UP))
         .then(() => tapButton(Button.X))
-        .then(() => wait(2500))
+        .then(() => wait(100))
+        .then(() => tapButton(Button.X))
+        .then(() => wait(25))
+        .then(() => tapButton(Button.X))
+        .then(() => wait(25))
+        .then(() => holdButton(Button.LEFT, 50))
+        .then(() => holdButton(Button.DOWN, 50))
+        .then(() => wait(200))
         .catch(console.error);
 };
-startControls();
 //# sourceMappingURL=index.js.map

@@ -6,6 +6,7 @@ import { once } from 'cluster';
 import { EventEmitter } from 'events';
 import XNesRunner, { XnesRunnerFrameEvent } from './xnesRunner';
 
+
 enum Button {
     "NONE" = 0,
     "UP" = 9,
@@ -34,30 +35,33 @@ enum CCode {
 
 const canvas: HTMLCanvasElement =
     document.getElementById('screen') as HTMLCanvasElement;
-const context = canvas.getContext('2d');
-const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+console.log({ canvas });
+
+// const context = canvas.getContext('2d');
+// const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 const frameOut: HTMLParagraphElement =
     document.getElementById('currentFrame') as HTMLParagraphElement;
 
-const render = (data: Int32Array) => {
-    for (let i = 0; i < data.length; i++) {
-        const val = data[i];
-        imgData.data[i * 4 + 0] = Math.abs((val & 0x0000FF) >> 0);
-        imgData.data[i * 4 + 1] = Math.abs((val & 0x00FF00) >> 8);
-        imgData.data[i * 4 + 2] = Math.abs((val & 0xFF0000) >> 16);
-        imgData.data[i * 4 + 3] = 255;
-    }
-    context.putImageData(imgData, 0, 0);
-};
+// const render = (data: Int32Array) => {
+//     for (let i = 0; i < data.length; i++) {
+//         const val = data[i];
+//         imgData.data[i * 4 + 0] = Math.abs((val & 0x0000FF) >> 0);
+//         imgData.data[i * 4 + 1] = Math.abs((val & 0x00FF00) >> 8);
+//         imgData.data[i * 4 + 2] = Math.abs((val & 0xFF0000) >> 16);
+//         imgData.data[i * 4 + 3] = 255;
+//     }
+//     context.putImageData(imgData, 0, 0);
+// };
 
 const filePath = path.resolve('./roms/alttp.smc');
 // const filePath = path.resolve('./roms/ALttP - VT_no-glitches-30_normal-open_randomized-ganon_key-sanity_g5yoJW6mvm.sfc');
-const xnes = new XNesRunner(filePath);
+const xnes = new XNesRunner(filePath, canvas);
 
 let currentFrame = 0;
 xnes.on('frame', (e: XnesRunnerFrameEvent) => {
-    render(e.data);
+    // render(e.data);
     currentFrame = e.frame;
     frameOut.innerText = e.frame.toString();
 });
@@ -279,8 +283,15 @@ const leaveHouse = (): Promise<void> => {
         .then(() => holdButton(Button.RIGHT, 50))
         .then(() => tapButton(Button.UP))
         .then(() => tapButton(Button.X))
-        .then(() => wait(2500))
+        .then(() => wait(100))
+        .then(() => tapButton(Button.X))
+        .then(() => wait(25))
+        .then(() => tapButton(Button.X))
+        .then(() => wait(25))
+        .then(() => holdButton(Button.LEFT, 50))
+        .then(() => holdButton(Button.DOWN, 50))
+        .then(() => wait(200))
         .catch(console.error);
 };
 
-startControls();
+// startControls();
