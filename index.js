@@ -32,7 +32,7 @@ var CCode;
 const canvas = document.getElementById('screen');
 console.log({ canvas });
 const frameOut = document.getElementById('currentFrame');
-const filePath = path.resolve('./roms/alttp.smc');
+const filePath = path.resolve('./roms/alttp.sfc');
 const xnes = new xnesRunner_1.default(filePath, canvas);
 let currentFrame = 0;
 xnes.on('frame', (e) => {

@@ -55,7 +55,7 @@ const frameOut: HTMLParagraphElement =
 //     context.putImageData(imgData, 0, 0);
 // };
 
-const filePath = path.resolve('./roms/alttp.smc');
+const filePath = path.resolve('./roms/alttp.sfc');
 // const filePath = path.resolve('./roms/ALttP - VT_no-glitches-30_normal-open_randomized-ganon_key-sanity_g5yoJW6mvm.sfc');
 const xnes = new XNesRunner(filePath, canvas);
 

@@ -1,5 +1,24 @@
 let romFile = false;
 let init = false;
+let currentFrame = 0;
+
+const listeners = [];
+
+const preventDefault = () => { };
+
+const KeyboardEvent = {
+  DOM_KEY_LOCATION_RIGHT: true
+}
+
+self.addEventListener = (type, callback) => {
+  console.log('self', type);
+  if (type == "focus") {
+    callback({
+      type,
+      preventDefault
+    });
+  }
+};
 
 onmessage = (e) => {
   // console.log(e);
@@ -7,8 +26,6 @@ onmessage = (e) => {
   switch (data.cmd) {
     case "canvas":
       self.Module.canvas = data.canvas;
-      self.Module.canvas.addEventListener("render", () => {
-      })
       onReady();
       break;
     case "loadfile":
@@ -22,12 +39,15 @@ onmessage = (e) => {
       break;
     case "start":
       console.log('WORKER', "start");
-      setInterval(Module._S9xAutoSaveSRAM, 1e4);
+      // setInterval(Module._S9xAutoSaveSRAM, 1e4);
       Module.cwrap("run", null, ["string"])("_.smc");
+
       setInterval(() => {
         // console.log(Module);
-        console.log(SDL.getGamepads())
       }, 1000);
+      break;
+    case "joy1":
+      console.log(e);
       break;
   }
 }
@@ -44,6 +64,9 @@ const initSNES = () => {
   Module.cwrap("set_frameskip", "number", ["number"])(0);
   Module._set_transparency(0);
   init = true;
+
+  keyIndexes = Object.keys(SDL.keyCodes);
+  currentKeyMaxIndex = keyIndexes.length;
   onReady();
 }
 
@@ -65,7 +88,7 @@ self.Module = {
   monitorRunDependencies: function (e) {
     console.log('monitorRunDependencies', e);
   },
-  doNotCaptureKeyboard: true,
+  // doNotCaptureKeyboard: true,
   stdin: (message) => {
     console.log('stdin');
     postMessage({ cmd: 'print', txt: message })
@@ -79,9 +102,66 @@ self.Module = {
     postMessage({ cmd: 'error', txt: message })
   },
   render: (e) => {
+    if (currentFrame % 7 == 0) {
+      pressAll();
+    }
     postMessage({ cmd: 'render', src: e.data })
+    currentFrame++;
   },
+  keyboardListeningElement: {
+    addEventListener: (type, callback) => {
+      listeners.push({ type, callback });
+    }
+  },
+  useWebGL: false
 }
+
+let currentKeyIndex = 0;
+let currentKeyMaxIndex = 0;
+let keyIndexes;
+
+const pressAll = () => {
+  if (SDL.events.length > 10)
+    return;
+  // const keyCode = SDL.keyCodes[keyIndexes[currentKeyIndex]];
+  const keyCode = keyIndexes[currentKeyIndex];
+  // const eventType = currentFrame % 2 == 0 ? "keydown" : "keyup";
+  const eventType = "keydown";
+
+  console.log({
+    keyCode,
+    currentKeyIndex,
+    keyboardState: SDL.keyboardState
+    // eventType,
+  });
+
+
+  for (let listener of listeners) {
+    if (listener.type == eventType) {
+      listener.callback({
+        preventDefault,
+        type: eventType,
+        keyCode,
+      });
+    }
+
+  }
+  currentKeyIndex = (currentKeyIndex + 1) % currentKeyMaxIndex;
+
+};
+
+// S9xMapButton(SDLK_RIGHT, S9xGetCommandT("Joypad1 Right"), false); // 39
+// S9xMapButton(SDLK_LEFT, S9xGetCommandT("Joypad1 Left"), false); // 37
+// S9xMapButton(SDLK_DOWN, S9xGetCommandT("Joypad1 Down"), false); // 40
+// S9xMapButton(SDLK_UP, S9xGetCommandT("Joypad1 Up"), false); // 38
+// S9xMapButton(SDLK_RETURN, S9xGetCommandT("Joypad1 Start"), false); // 13
+// S9xMapButton(SDLK_SPACE, S9xGetCommandT("Joypad1 Select"), false); // 32
+// S9xMapButton(SDLK_d, S9xGetCommandT("Joypad1 A"), false); // 68
+// S9xMapButton(SDLK_c, S9xGetCommandT("Joypad1 B"), false); // 67
+// S9xMapButton(SDLK_s, S9xGetCommandT("Joypad1 X"), false); // 83
+// S9xMapButton(SDLK_x, S9xGetCommandT("Joypad1 Y"), false); // 88
+// S9xMapButton(SDLK_a, S9xGetCommandT("Joypad1 L"), false); // 65
+// S9xMapButton(SDLK_z, S9xGetCommandT("Joypad1 R"), false); // 90
 
 document = {
   addEventListener: () => { }
@@ -4335,10 +4415,12 @@ var Browser = {
         if (contextHandle) {
           ctx = GL.getContext(contextHandle)
             .GLctx
+
         }
       }
     } else {
       ctx = canvas.getContext("2d")
+      ctx.imageSmoothingEnabled = false;
     }
     if (!ctx) return null;
     if (setInModule) {
@@ -5418,6 +5500,7 @@ var SDL = {
     return code
   },
   handleEvent: function (event) {
+    // console.log("handleEvent", event);
     if (event.handled) return;
     event.handled = true;
     switch (event.type) {
@@ -5432,7 +5515,9 @@ var SDL = {
       case "keyup":
         {
           var down = event.type === "keydown";
-          var code = SDL.lookupKeyCodeForEvent(event); HEAP8[SDL.keyboardState + code >> 0] = down; SDL.modState = (HEAP8[SDL.keyboardState + 1248 >> 0] ? 64 : 0) | (HEAP8[SDL.keyboardState + 1249 >> 0] ? 1 : 0) | (HEAP8[SDL.keyboardState + 1250 >> 0] ? 256 : 0) | (HEAP8[SDL.keyboardState + 1252 >> 0] ? 128 : 0) | (HEAP8[SDL.keyboardState + 1253 >> 0] ? 2 : 0) | (HEAP8[SDL.keyboardState + 1254 >> 0] ? 512 : 0);
+          var code = SDL.lookupKeyCodeForEvent(event);
+          HEAP8[SDL.keyboardState + code >> 0] = down;
+          SDL.modState = (HEAP8[SDL.keyboardState + 1248 >> 0] ? 64 : 0) | (HEAP8[SDL.keyboardState + 1249 >> 0] ? 1 : 0) | (HEAP8[SDL.keyboardState + 1250 >> 0] ? 256 : 0) | (HEAP8[SDL.keyboardState + 1252 >> 0] ? 128 : 0) | (HEAP8[SDL.keyboardState + 1253 >> 0] ? 2 : 0) | (HEAP8[SDL.keyboardState + 1254 >> 0] ? 512 : 0);
           if (down) {
             SDL.keyboardMap[code] = event.keyCode
           } else {
