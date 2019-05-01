@@ -6,18 +6,18 @@ const listeners = [];
 
 const preventDefault = () => { };
 
-const KeyboardEvent = {
-  DOM_KEY_LOCATION_RIGHT: true
+class KeyboardEvent extends CustomEvent {
+  constructor(type) {
+    super(type);
+    this.DOM_KEY_LOCATION_RIGHT = 1;
+  }
 }
 
 self.addEventListener = (type, callback) => {
-  console.log('self', type);
-  if (type == "focus") {
-    callback({
-      type,
-      preventDefault
-    });
-  }
+  listeners.push({
+    type,
+    callback,
+  });
 };
 
 onmessage = (e) => {
@@ -124,32 +124,40 @@ const pressAll = () => {
   if (SDL.events.length > 10)
     return;
   // const keyCode = SDL.keyCodes[keyIndexes[currentKeyIndex]];
-  const keyCode = keyIndexes[currentKeyIndex];
+  // const keyCode = 88; //keyIndexes[currentKeyIndex];
   // const eventType = currentFrame % 2 == 0 ? "keydown" : "keyup";
   const eventType = "keydown";
 
-  console.log({
-    keyCode,
-    currentKeyIndex,
-    keyboardState: SDL.keyboardState
-    // eventType,
-  });
+  // console.log({
+  //   keyCode,
+  //   currentKeyIndex,
+  // keyboardState: SDL.keyboardState
+  //   // eventType,
+  // });
 
 
   for (let listener of listeners) {
-    if (listener.type == eventType) {
-      listener.callback({
-        preventDefault,
-        type: eventType,
-        keyCode,
-      });
+    if (listener.type == "keydown" || listener.type == "keyup") {
+      const event = new KeyboardEvent(listener.type);
+      event.keyCode = 88;
+      event.location = 0;
+      event.key = 'KeyX';
+      event.target = null;
+      listener.callback(event);
     }
 
-  }
-  currentKeyIndex = (currentKeyIndex + 1) % currentKeyMaxIndex;
+    if (listener.type == "focus") {
+      const event = new CustomEvent(listener.type);
+      event.keyCode = 88;
+      event.location = 0;
+      event.key = 'KeyX';
+      event.target = null;
+      listener.callback(event);
+    }
+    currentKeyIndex = (currentKeyIndex + 1) % currentKeyMaxIndex;
 
-};
-
+  };
+}
 // S9xMapButton(SDLK_RIGHT, S9xGetCommandT("Joypad1 Right"), false); // 39
 // S9xMapButton(SDLK_LEFT, S9xGetCommandT("Joypad1 Left"), false); // 37
 // S9xMapButton(SDLK_DOWN, S9xGetCommandT("Joypad1 Down"), false); // 40
@@ -5500,7 +5508,6 @@ var SDL = {
     return code
   },
   handleEvent: function (event) {
-    // console.log("handleEvent", event);
     if (event.handled) return;
     event.handled = true;
     switch (event.type) {

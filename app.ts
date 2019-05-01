@@ -5,7 +5,6 @@ require('electron-reload')(__dirname);
 let win: BrowserWindow;
 
 app.once('ready', () => {
-    console.log('APP READY');
     win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -19,7 +18,10 @@ app.once('ready', () => {
         console.log('show');
     });
     win.webContents.openDevTools();
-    win.loadFile(path.resolve('./index.html'));
+    const filePath = path.resolve('./index.html');
+    // const filePath = path.resolve('./xnes_out/snes9x.html');
+    console.log(filePath);
+    win.loadFile(filePath);
 });
 
 app.on('window-all-closed', () => {

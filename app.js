@@ -6,7 +6,6 @@ const path = tslib_1.__importStar(require("path"));
 require('electron-reload')(__dirname);
 let win;
 electron_1.app.once('ready', () => {
-    console.log('APP READY');
     win = new electron_1.BrowserWindow({
         width: 800,
         height: 600,
@@ -20,7 +19,9 @@ electron_1.app.once('ready', () => {
         console.log('show');
     });
     win.webContents.openDevTools();
-    win.loadFile(path.resolve('./index.html'));
+    const filePath = path.resolve('./index.html');
+    console.log(filePath);
+    win.loadFile(filePath);
 });
 electron_1.app.on('window-all-closed', () => {
     electron_1.app.quit();
