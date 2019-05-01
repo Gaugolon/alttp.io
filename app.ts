@@ -1,6 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
+
+// import * as XNES from './xnes_out/snes9x';
 
 let win: BrowserWindow;
 
@@ -15,12 +17,12 @@ app.once('ready', () => {
         }
     });
     win.on('show', () => {
-        console.log('show');
+        // console.log('show');
     });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     const filePath = path.resolve('./index.html');
     // const filePath = path.resolve('./xnes_out/snes9x.html');
-    console.log(filePath);
+    // console.log(filePath);
     win.loadFile(filePath);
 });
 
