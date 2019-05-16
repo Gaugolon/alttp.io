@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node node_modules/nodemon/bin/nodemon.js -e ts,js -i node_modules -- node_modules/ts-node/dist/bin.js main.ts",
+    "start": "node node_modules/nodemon/bin/nodemon.js -w src/*.* -e ts,js -i roms -i vids -i node_modules -- node_modules/ts-node/dist/bin.js src/main.ts",
+    "start:xnes": "node node_modules/nodemon/bin/nodemon.js -e ts,js -i node_modules -- node_modules/ts-node/dist/bin.js xnesRunner.ts",
     "electron": "electron .",
     "start:electron": "npm run build && npm run electron",
     "electron-rebuild": "electron-rebuild -w opencv4nodejs",
@@ -15,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/emscripten": "0.0.32",
+    "@types/express": "^4.16.1",
     "@types/node": "^11.13.6",
     "@types/webpack": "^4.4.27",
     "awesome-typescript-loader": "^5.2.1",
@@ -33,7 +34,15 @@
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "ffmpeg.js": "^3.1.9001",
+    "file-url": "^3.0.0",
+    "fluent-ffmpeg": "^2.1.2",
     "import-scripts": "^1.0.0",
-    "node-video-lib": "^2.1.8"
+    "node-video-lib": "^2.1.8",
+    "opencv4nodejs": "^4.16.0"
   }
 }

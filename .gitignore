@@ -2,6 +2,6 @@ node_modules
 .awcache
 dist
 exp
-roms
 xnes
 emsdk
+src/public/vids

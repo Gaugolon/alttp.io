@@ -1,0 +1,208 @@
+C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:170 Electron Security Warning (Insecure Content-Security-Policy) This renderer process has either no Content Security
+    Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+    this app to unnecessary security risks.
+ 
+For more information and help, consult
+https://electronjs.org/docs/tutorial/security.
+ This warning will not show up
+once the app is packaged.
+isUnsafeEvalEnabled.then @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:170
+Promise.then (async)
+warnAboutInsecureCSP @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:163
+logSecurityWarnings @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:310
+loadHandler @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:335
+load (async)
+module.exports @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\security-warnings.js:338
+(anonymous) @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\init.js:164
+(anonymous) @ C:\Users\Gaugolon\Development\experimental\alttp.io\node_modules\electron\dist\resources\electron.asar\renderer\init.js:178
+Module._compile @ internal/modules/cjs/loader.js:693
+Module._extensions..js @ internal/modules/cjs/loader.js:704
+Module.load @ internal/modules/cjs/loader.js:602
+tryModuleLoad @ internal/modules/cjs/loader.js:541
+Module._load @ internal/modules/cjs/loader.js:533
+Module.runMain @ internal/modules/cjs/loader.js:746
+startup @ internal/bootstrap/node.js:282
+bootstrapNodeJSCore @ internal/bootstrap/node.js:759
+snes9x.js:1 Syncing file system...
+snes9x.js:1 The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu
+openAudioContext @ snes9x.js:1
+_SDL_OpenAudio @ snes9x.js:1
+<WASM UNNAMED> @ wasm-0000006e-242:70
+<WASM UNNAMED> @ wasm-0000006e-584:221
+<WASM UNNAMED> @ wasm-0000006e-1061:154
+Module._main @ snes9x.js:1
+callMain @ snes9x.js:1
+doRun @ snes9x.js:1
+(anonymous) @ snes9x.js:1
+setTimeout (async)
+run @ snes9x.js:1
+runCaller @ snes9x.js:1
+removeRunDependency @ snes9x.js:1
+receiveInstance @ snes9x.js:1
+receiveInstantiatedSource @ snes9x.js:1
+Promise.then (async)
+createWasm @ snes9x.js:1
+Module.asm @ snes9x.js:1
+(anonymous) @ snes9x.js:1
+snes9x.js:1 File system synced.
+snes9x.html:185 Error opening the ROM file. 
+printErr @ snes9x.html:185
+put_char @ snes9x.js:1
+write @ snes9x.js:1
+write @ snes9x.js:1
+doWritev @ snes9x.js:1
+___syscall146 @ snes9x.js:1
+<WASM UNNAMED> @ wasm-0000006e-241:47
+<WASM UNNAMED> @ wasm-0000006e-175:121
+<WASM UNNAMED> @ wasm-0000006e-101:15
+<WASM UNNAMED> @ wasm-0000006e-1065:33
+<WASM UNNAMED> @ wasm-0000006e-1069:3
+Module._run @ snes9x.js:1
+ccall @ snes9x.js:1
+(anonymous) @ snes9x.js:1
+y @ snes9x.html:250
+snes9x.js:1 Uncaught ExitStatus {name: "ExitStatus", message: "Program terminated with exit(1)", status: 1}
+Module.quit @ snes9x.js:1
+exit @ snes9x.js:1
+_exit @ snes9x.js:1
+<WASM UNNAMED> @ wasm-0000006e-1065:35
+<WASM UNNAMED> @ wasm-0000006e-1069:3
+Module._run @ snes9x.js:1
+ccall @ snes9x.js:1
+(anonymous) @ snes9x.js:1
+y @ snes9x.html:250
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 File system synced
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "Space"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: " "keyCode: 32location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 32652.70000000237type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 32__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "Space"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: " "keyCode: 32location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 32774.30000000095type: "keydown"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 32__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: " ", code: "Space", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "Enter", code: "Enter", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "Enter", code: "Enter", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "Enter"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "Enter"keyCode: 13location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 34647.70000000135type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 13__proto__: KeyboardEvent
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 File system synced
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: truereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 101249.7000000003type: "keydown"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: truereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 101282.60000000228type: "keydown"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 101284.70000000016type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 102134.90000000093type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 121843.80000000237type: "keydown"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: falsecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 121906.80000000066type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 File system synced
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "Control", code: "ControlLeft", location: 1, …}
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: truecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 134033.50000000137type: "keydown"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "x", code: "KeyX", location: 0, …}altKey: falsebubbles: truecancelBubble: falsecancelable: truecharCode: 0code: "KeyX"composed: truectrlKey: truecurrentTarget: nulldefaultPrevented: truedetail: 0eventPhase: 0handled: trueisComposing: falseisTrusted: truekey: "x"keyCode: 88location: 0metaKey: falsepath: (4) [body, html, document, global]repeat: falsereturnValue: falseshiftKey: falsesourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}srcElement: bodytarget: bodytimeStamp: 134111.4000000016type: "keyup"view: global {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: global, …}which: 88__proto__: KeyboardEvent
+snes9x.js:1 KeyboardEvent {isTrusted: true, handled: true, key: "Control", code: "ControlLeft", location: 1, …}
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
+snes9x.js:1 File system synced
