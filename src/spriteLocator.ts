@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as cv from 'opencv4nodejs'
 import * as path from 'path'
+import { CV_8SC4, CV_8SC3 } from 'opencv4nodejs';
 const debug = require('debug');
 const d = debug('SpriteLocator')
 
@@ -21,6 +22,7 @@ export default class SpriteLocator {
     })
   }
 
+
   public parseFrame(
     frameData: Uint8ClampedArray,
     width: number,
@@ -28,43 +30,22 @@ export default class SpriteLocator {
   ): LocatorResult[] {
     d('parseFrame')
     const result: LocatorResult[] = []
-    const buffer = Buffer.from(frameData)
-    const frameMat = (new cv.Mat(buffer, height, width, cv.CV_8UC3))
-    // .cvtColor(cv.COLOR_BGR2RGB)
-
-    const kernelSize = 7
-    const cvKernelSize = new cv.Size(kernelSize, kernelSize)
+    const frameMat = new cv.Mat(
+      Buffer.from(frameData),
+      height,
+      width,
+      cv.CV_8UC3
+    )
 
     this.sprites.forEach((spriteMat) => {
       const sprites: Sprite[] = []
       const matches = frameMat
-        // .cvtColor(cv.COLOR_RGB2GRAY)
-        // .rescale(scale)
-        .blur(cvKernelSize)
-        .blur(cvKernelSize)
-        .blur(cvKernelSize)
-        .matchTemplate(
-          spriteMat
-            // .cvtColor(cv.COLOR_RGB2GRAY),
-            // .rescale(scale)
-            .blur(cvKernelSize)
-            .blur(cvKernelSize)
-            .blur(cvKernelSize),
-          5
-          // frameMask
-          //     .rescale(scale)
-          //     .blur(cvKernelSize),
-          // .cvtColor(cv.COLOR_BGR2GRAY)
-        )
+        .matchTemplate(spriteMat, cv.TM_SQDIFF_NORMED)
 
-      // console.log(matches.getData())
 
-      const threshold = 254
+      const threshold = 0.9
       const loc = this.extractLocation(matches, threshold)
-      // const minMax = matches.minMaxLoc();
-      // const { maxLoc: { x, y } } = minMax;
-      // const maxLoc = { x: minMax.maxLoc.x, y: minMax.maxLoc.y };
-      // const minLoc = { x: minMax.minLoc.x, y: minMax.minLoc.y };
+
       loc.forEach((location) => {
         sprites.push({
           x: location.x,
@@ -78,7 +59,11 @@ export default class SpriteLocator {
       result.push({
         sprites,
         item: Uint8ClampedArray.from(spriteMat.getData()),
-        matches: Uint8ClampedArray.from(matches.getData()),
+        matches: Uint8ClampedArray.from(
+          matches
+            .mul(255)
+            .convertTo(cv.CV_8UC3)
+            .getData()),
         matchesMat: matches,
       })
 

@@ -23,8 +23,12 @@ let imageLoaded = false;
 mapImage.addEventListener('load', () => imageLoaded = true);
 mapImage.src = 'http://localhost:8081/public/maps/light_world-2_scaled.jpg';
 
+const fetchInterval = 1000;
+
+
 setInterval(() => {
-    fetch('http://localhost:8081/frame')
+    console.log('fetch');
+    fetch('http://localhost:8081/frame', {}, fetchInterval)
         .then((data) => data.json())
         .then((data) => {
             // console.log(data.frame.length, ccin);
@@ -55,25 +59,21 @@ setInterval(() => {
             }
             if (data.sprites && data.sprites.length > 0) {
                 for (let i = 0; i < data.sprites[0].matches.length; i++) {
-                    spriteMatchesImageData.data[i] = data.sprites[0].matches[i];
-                    // const val = data.sprites[0].matches[i];
-                    // spriteMatchesImageData.data[i * 4 + 0] = val;
-                    // spriteMatchesImageData.data[i * 4 + 1] = val;
-                    // spriteMatchesImageData.data[i * 4 + 2] = val;
-                    // spriteMatchesImageData.data[i * 4 + 3] = 255;
+                    // spriteMatchesImageData.data[i] = data.sprites[0].matches[i];
+                    const val = data.sprites[0].matches[i];
+                    spriteMatchesImageData.data[i * 4 + 0] = val;
+                    spriteMatchesImageData.data[i * 4 + 1] = val;
+                    spriteMatchesImageData.data[i * 4 + 2] = val;
+                    spriteMatchesImageData.data[i * 4 + 3] = 255;
                 }
                 spriteMatchesContext.putImageData(spriteMatchesImageData, 0, 0);
 
+                console.log("data.sprites[0].item.length", data.sprites[0].item.length);
                 for (let i = 0; i < data.sprites[0].item.length; i++) {
                     spriteImageData.data[i] = data.sprites[0].item[i];
-                    // const val = data.sprites[0].matches[i];
-                    // spriteImageData.data[i * 4 + 0] = data.sprites[0].item[i * 3 + 0];
-                    // spriteImageData.data[i * 4 + 1] = data.sprites[0].item[i * 3 + 1];
-                    // spriteImageData.data[i * 4 + 2] = data.sprites[0].item[i * 3 + 2];
-                    // spriteImageData.data[i * 4 + 3] = 255;
                 }
 
-                console.log(data.sprites[0]);
+                // console.log(data.sprites[0]);
 
                 spriteContext.putImageData(spriteImageData, 0, 0);
             }
@@ -91,29 +91,10 @@ setInterval(() => {
                 }
                 mapContext.putImageData(mapImageData, 0, 0);
             }
-            if (data.matches) {
-                console.log("data.matches")
-                console.log(data.matches.data.length)
-                console.log(data.matches.data.slice(0, 10))
-                matchCanvas.width = data.matches.w;
-                matchCanvas.height = data.matches.h;
-                matchContext = matchCanvas.getContext('2d');
-                matchImageData = matchContext.getImageData(0, 0, matchCanvas.width, matchCanvas.height)
-                for (let i = 0; i < data.matches.data.length; i++) {
-                    matchImageData.data[i] = data.matches.data[i];
-                    // const val = data.matches.data[i];
-                    // matchImageData.data[i * 4 + 0] = val;
-                    // matchImageData.data[i * 4 + 1] = val;
-                    // matchImageData.data[i * 4 + 2] = val;
-                    // matchImageData.data[i * 4 + 3] = 255;
-                }
-                matchContext.putImageData(matchImageData, 0, 0);
-            }
-
-
 
             // console.log('done');
         })
         .catch((error) => console.error(error));
-}, 1000);
+}, fetchInterval);
+
 //# sourceMappingURL=index.js.map

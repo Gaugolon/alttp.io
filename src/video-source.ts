@@ -32,7 +32,7 @@ export default class VideoSource extends EventEmitter {
     this.started = true
 
     this.subprocess = child_process.spawn('ffmpeg', [
-      "-ss", "1300",
+      "-ss", "1305",
       "-i", this.filePath,
       "-an",
       "-hide_banner",
