@@ -5,18 +5,23 @@
     #screen,
     #map,
     #matches,
-    #mapimg {
+    #mapimg,
+    #spriteMatches,
+    #sprites {
       width: 100%;
       height: auto;
+      max-width: 300px;
     }
   </style>
   <script defer src="/public/js/index.js"></script>
 </head>
 
 <body>
-  <canvas id="screen" width="288" height="224"> </canvas>
+  <canvas id="screen" width="258" height="224"> </canvas>
+  <canvas id="sprite" width="16" height="16"> </canvas>
+  <canvas id="spriteMatches" width="243" height="209"> </canvas>
   <canvas id="map" width="1024" height="1024"> </canvas>
-  <canvas id="matches" width="1024" height="1024"> </canvas>
+  <canvas id="matches" width="1009" height="1009"> </canvas>
 </body>
 
 </html>

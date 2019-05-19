@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node node_modules/nodemon/bin/nodemon.js -w src/*.* -e ts,js -i roms -i vids -i node_modules -- node_modules/ts-node/dist/bin.js src/main.ts",
+    "start": "node --max-old-space-size=8192 node_modules/nodemon/bin/nodemon.js -w src/*.ts -i ./src/public/* -e ts -i ./node_modules -- --max-old-space-size=8192 node_modules/ts-node/dist/bin.js src/main.ts",
     "start:xnes": "node node_modules/nodemon/bin/nodemon.js -e ts,js -i node_modules -- node_modules/ts-node/dist/bin.js xnesRunner.ts",
     "electron": "electron .",
     "start:electron": "npm run build && npm run electron",

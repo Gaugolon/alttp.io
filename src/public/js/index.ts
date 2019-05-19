@@ -1,23 +1,23 @@
 
 
 const canvas: HTMLCanvasElement =
-    document.getElementById('screen') as HTMLCanvasElement;
+    document.getElementById('screen') as HTMLCanvasElement
 
-const context = canvas.getContext('2d');
+const context = canvas.getContext('2d')
 
-const imageData = context.getImageData(0, 0, 288, 224);
+const imageData = context.getImageData(0, 0, 288, 224)
 
 setInterval(() => {
     fetch('http://localhost:8081/frame')
         .then((data) => data.json())
         .then((data) => {
-            console.log(data);
+            console.log(data)
             for (let i in data) {
-                imageData.data[i] = data[i];
+                imageData.data[i] = data[i]
             }
         })
-        .catch((error) => console.error(error));
-}, 1000);
+        .catch((error) => console.error(error))
+}, 1000)
 
 
 // import * as fs from 'fs';
