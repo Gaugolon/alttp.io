@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node node_modules/nodemon/bin/nodemon.js -w ./src -i ./src/public -e ts -i ./node_modules -- node_modules/ts-node/dist/bin.js ./src/main.ts",
+    "start": "node node_modules/nodemon/bin/nodemon.js -e ts,js -w ./src/* -i ./src/public -i ./node_modules --exec node -- node_modules/ts-node/dist/bin.js ./src/main.ts",
     "sprites_from_maps": "node node_modules/nodemon/bin/nodemon.js -w src/spriteCreator.ts -e ts --exec node -- node_modules/ts-node/dist/bin.js ./src/spriteCreator.ts -m cvtmaps -i ./src/public/maps -o /src/public/tiles",
     "sprites_to_spr": "node node_modules/nodemon/bin/nodemon.js -w src/spriteCreator.ts -e ts --exec node -- node_modules/ts-node/dist/bin.js ./src/spriteCreator.ts -m cvtsprites -i ./src/public/sprites_src -o ./src/public/spr",
     "start:xnes": "node node_modules/nodemon/bin/nodemon.js -e ts,js -i node_modules -- node_modules/ts-node/dist/bin.js xnesRunner.ts",

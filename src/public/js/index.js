@@ -23,7 +23,7 @@ let imageLoaded = false;
 mapImage.addEventListener('load', () => imageLoaded = true);
 mapImage.src = 'http://localhost:8081/public/maps/light_world-2_scaled.jpg';
 
-const fetchInterval = 1000;
+const fetchInterval = 500;
 
 
 setInterval(() => {

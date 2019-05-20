@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as cv from 'opencv4nodejs'
 import * as path from 'path'
+import { Mat } from 'opencv4nodejs';
 const d = require('debug')('ALTTP.IO.SpriteLocator')
 
 function readSprite(filename): SpriteData {
@@ -74,6 +75,7 @@ export default class SpriteLocator {
     height: number
   ): LocatorResult[] {
     d('parseFrame')
+    const sharpenMat = new cv.Mat(Buffer.from([0, -1, 0, -1, 5, -1, 0, -1, 0]), 3, 3, cv.CV_8S)
 
     const result: LocatorResult[] = []
     const frameMat = new cv.Mat(
@@ -82,6 +84,8 @@ export default class SpriteLocator {
       width,
       cv.CV_8UC3
     )
+    // .filter2D(0, sharpenMat)
+
 
     this.sprites.forEach((spriteMat) => {
       const sprites: Sprite[] = []

@@ -31,7 +31,7 @@ export default class AlttpServer {
             const currentFrameNumber = this.config.getCurrentFrameNumber()
 
             if (currentFrameNumber === this.lastFrame) {
-                next()
+                res.json({})
                 return
             }
             this.lastFrame = currentFrameNumber
@@ -56,6 +56,8 @@ export default class AlttpServer {
             const matches = this.config.getMatches()
             const spriteLocations = this.config.getSpriteLocations()
 
+            // d(matches)
+
             res.json({
                 frame: Array.from(currentFrame),
                 // minLoc: Object.assign(minLoc, { w: 288 / 4, h: 224 / 4 }),
@@ -76,12 +78,10 @@ export default class AlttpServer {
             })
         })
 
-        this.express.use('/', express.static(
-            path.resolve(__dirname, 'public/www'))
-        )
-        this.express.use('/public', express.static(
-            path.resolve(__dirname, 'public'))
-        )
+        const wwwPath = path.resolve(__dirname, 'public/www')
+        this.express.use('/', express.static(wwwPath))
+        const publicPath = path.resolve(__dirname, 'public')
+        this.express.use('/public', express.static(publicPath))
         this.express.listen(8081)
     }
 }

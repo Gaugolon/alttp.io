@@ -3,9 +3,6 @@ import { EventEmitter } from 'events'
 import * as fs from 'fs'
 import * as path from 'path'
 const d = require('debug')('ALTTP.IO.videoSource')
-const {
-  Worker
-} = require('worker_threads')
 
 const DefaultVideoSourceConfig: VideoSourceOptions = {
   width: 258,
