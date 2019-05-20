@@ -1,8 +1,7 @@
 import * as fs from 'fs'
 import * as cv from 'opencv4nodejs'
 import * as path from 'path'
-const debug = require('debug');
-const d = debug('SpriteLocator')
+const d = require('debug')('ALTTP.IO.SpriteLocator')
 
 function readSprite(filename): SpriteData {
   return JSON.parse(fs.readFileSync(filename).toString())
@@ -48,7 +47,7 @@ export default class SpriteLocator {
           img: spriteMat,
           // mask: maskMat
         })
-        d(this.sprites)
+        // d(this.sprites)
       })
   }
 
