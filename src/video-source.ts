@@ -2,6 +2,8 @@ import child_process, { ChildProcess } from 'child_process'
 import { EventEmitter } from 'events'
 import * as fs from 'fs'
 import * as path from 'path'
+const d = require('debug')('videoSource')
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 
 export default class VideoSource extends EventEmitter {
   private subprocess: ChildProcess
@@ -27,22 +29,24 @@ export default class VideoSource extends EventEmitter {
   }
 
   public start() {
+    return;
     if (this.started)
       return
     this.started = true
 
     this.subprocess = child_process.spawn('ffmpeg', [
-      "-ss", "1305",
+      "-ss", "1320",
       "-i", this.filePath,
       "-an",
       "-hide_banner",
-      "-vf", "scale=w=258:h=224",
+      "-vf", `scale=w=${this.width}:h=${this.height}`,
       "-pix_fmt", "rgb24",
       "-c:v", "rawvideo",
       "-f", "rawvideo",
       "-"
     ])
     this.subprocess.stdout.on('data', (data) => this.processData(data))
+    this.subprocess.stderr.on('data', (data) => d(data.toString()))
     this.subprocess.addListener('exit', () => this.emit('end'))
   }
 
@@ -59,4 +63,8 @@ export default class VideoSource extends EventEmitter {
 
   public pause = () => this.subprocess.stdout.pause()
   public resume = () => this.subprocess.stdout.resume()
+}
+
+if (!isMainThread) {
+
 }

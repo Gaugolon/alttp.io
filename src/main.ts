@@ -21,13 +21,14 @@ let frameMask: cv.Mat
 let matches: cv.Mat
 
 const vs = new VideoSource(videoFile)
-const spriteLocator = new SpriteLocator('./src/public/sprites')
+const spriteLocator = new SpriteLocator('./src/public/spr')
 
 let currentFrame: number = 1300
-let currentPos = { x: 0, y: 0 }
+let lastFrame = 0;
+// let currentPos = { x: 0, y: 0 }
 let maxLoc = { x: 0, y: 0 }
 let minLoc = { x: 0, y: 0 }
-let currentMap: Buffer = Buffer.alloc(288 * 224 * 3)
+// let currentMap: Buffer = Buffer.alloc(288 * 224 * 3)
 let spriteLocations: LocatorResult[] = []
 
 const app = express()
@@ -39,14 +40,23 @@ vs.on('frame', () => {
         .parseFrame(vs.currentFrame, vs.width, vs.height)
     matches = spriteLocations[0].matchesMat
 
+    // d(currentFrame, spriteLocations
+    //     .filter((item) => item.sprites.filter((item) => item.y > 209).length > 0)
+    //     .map((loc) => loc.sprites))
     currentFrame++
-    vs.resume()
+    setTimeout(vs.resume, 100)
 })
 
 app.use(cors())
 app.use(bodyParser.json())
 app.get('/frame', (req, res, next) => {
     d('app.get "frame"')
+
+    if (currentFrame === lastFrame) {
+        next()
+        return
+    }
+    lastFrame = currentFrame
     // d(spritePositions[0])
     // d('app.get "frame"', {
     //     currentFrame: vs.currentFrame,
@@ -65,15 +75,15 @@ app.get('/frame', (req, res, next) => {
     }
     res.json({
         frame: Array.from(vs.currentFrame),
-        minLoc: Object.assign(minLoc, { w: 288 / 4, h: 224 / 4 }),
-        maxLoc: Object.assign(maxLoc, { w: 288 / 4, h: 224 / 4 }),
+        // minLoc: Object.assign(minLoc, { w: 288 / 4, h: 224 / 4 }),
+        // maxLoc: Object.assign(maxLoc, { w: 288 / 4, h: 224 / 4 }),
         // pos: Object.assign(currentPos, { w: 288 / 4, h: 224 / 4 }),
         // map: Array.from(currentMap),
-        // matches: {
-        //     data: Array.from(matches.getData()),
-        //     w: matches.cols,
-        //     h: matches.rows,
-        // },
+        matches: {
+            data: Array.from(matches.getData()),
+            w: matches.cols,
+            h: matches.rows,
+        },
         sprites: spriteLocations.map((value: LocatorResult): any => {
             const result = value as any
             result.matches = Array.from(value.matches)

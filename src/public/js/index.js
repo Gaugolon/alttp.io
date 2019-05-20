@@ -58,25 +58,42 @@ setInterval(() => {
 
             }
             if (data.sprites && data.sprites.length > 0) {
-                for (let i = 0; i < data.sprites[0].matches.length; i++) {
-                    // spriteMatchesImageData.data[i] = data.sprites[0].matches[i];
-                    const val = data.sprites[0].matches[i];
-                    spriteMatchesImageData.data[i * 4 + 0] = val;
-                    spriteMatchesImageData.data[i * 4 + 1] = val;
-                    spriteMatchesImageData.data[i * 4 + 2] = val;
-                    spriteMatchesImageData.data[i * 4 + 3] = 255;
+                for (let s = 0; s < data.sprites.length; s++) {
+
+                    for (let i = 0; i < data.sprites[s].matches.length; i++) {
+                        // spriteMatchesImageData.data[i] = data.sprites[0].matches[i];
+                        const val = data.sprites[s].matches[i];
+                        spriteMatchesImageData.data[i * 4 + 0] = val;
+                        spriteMatchesImageData.data[i * 4 + 1] = val;
+                        spriteMatchesImageData.data[i * 4 + 2] = val;
+                        spriteMatchesImageData.data[i * 4 + 3] = 255;
+                    }
+                    spriteMatchesContext.putImageData(spriteMatchesImageData, 0, 0);
+
+                    // for (let i = 0; i < data.sprites[s].item.length; i++) {
+                    //     spriteImageData.data[i * 4 + 0] = data.sprites[0].item[i * 3 + 0];
+                    //     spriteImageData.data[i * 4 + 1] = data.sprites[0].item[i * 3 + 1];
+                    //     spriteImageData.data[i * 4 + 2] = data.sprites[0].item[i * 3 + 2];
+                    //     spriteImageData.data[i * 4 + 3] = 255;
+                    // }
+
+                    for (let i = 0; i < data.sprites[s].sprites.length; i++) {
+                        const sprite = data.sprites[s].sprites[i];
+                        screenContext.strokeStyle = "#FF0000";
+                        screenContext.lineWidth = 1;
+                        screenContext.strokeRect(sprite.x, sprite.y, sprite.w, sprite.h);
+                        // spriteImageData.data[i * 4 + 0] = data.sprites[0].item[i * 3 + 0];
+                        // spriteImageData.data[i * 4 + 1] = data.sprites[0].item[i * 3 + 1];
+                        // spriteImageData.data[i * 4 + 2] = data.sprites[0].item[i * 3 + 2];
+                        // spriteImageData.data[i * 4 + 3] = 255;
+                    }
+
+                    // console.log(data.sprites[s].sprites);
+
+                    spriteContext.putImageData(spriteImageData, 0, 0);
                 }
-                spriteMatchesContext.putImageData(spriteMatchesImageData, 0, 0);
-
-                console.log("data.sprites[0].item.length", data.sprites[0].item.length);
-                for (let i = 0; i < data.sprites[0].item.length; i++) {
-                    spriteImageData.data[i] = data.sprites[0].item[i];
-                }
-
-                // console.log(data.sprites[0]);
-
-                spriteContext.putImageData(spriteImageData, 0, 0);
             }
+
             // if (data.pos) {
             //     mapContext.strokeStyle = "#FF0000";
             //     mapContext.lineWidth = 4;
