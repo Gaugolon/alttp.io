@@ -11,10 +11,6 @@ const videoFile = './src/public/vids/SNES_Longplay_[315]_The_Legend_of_Zelda_-_A
 
 let matches: cv.Mat = new cv.Mat()
 
-const vs = new VideoSource({
-    filePath: videoFile,
-    start: 1300
-})
 const spriteLocator = new SpriteLocator('./src/public/spr')
 
 let currentFrameCount: number = 1300
@@ -39,7 +35,7 @@ worker.once('message', (message: MessageEvent) => {
         height: 224,
         colors: 3,
         filePath: videoFile,
-        start: 1325,
+        start: 4400,
         autoPause: true,
         spritesDirectory: path.resolve('./src/public/spr')
     }

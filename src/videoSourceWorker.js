@@ -1,7 +1,7 @@
 const { parentPort } = require('worker_threads');
 const child_process = require('child_process')
 const d = require('debug')('ALTTP.IO.videoSourceWorker')
-
+const fs = require('fs');
 const DefaultVideoSourceConfig = {
     width: 258,
     height: 224,
@@ -31,6 +31,7 @@ parentPort.once('message', (message) => {
 })
 
 function run() {
+
     subprocess = child_process.spawn('ffmpeg', [
         "-ss", `${options.start}`,
         "-i", options.filePath,
